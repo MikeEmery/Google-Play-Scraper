@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = "Get Google Play App search results from ruby by scraping their website."
   s.description = "Uses Nokogiri to scrape app search results on the Google Play app search results page.  Returns results as Ruby objects"
+  s.license     = 'MIT'
 
   s.rubyforge_project = "google_play_scraper"
 
