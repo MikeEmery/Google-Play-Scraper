@@ -16,8 +16,26 @@ Doing a search
 
     search = GooglePlayScraper::Search.new('Angry Birds')
     results = search.run # an array of GooglePlayScraper::App
-    
 
+You can customize the results you get back by passing a hash as the second parameter to GooglePlayScraper::Search constructor.
+
+    module GooglePlayScraper
+      module SearchOptions
+        CATEGORY = :c
+        LANGUAGE = :hl
+        APPLY_SORTING = :sort
+        SAFE_SEARCH = :safe
+        NUMBER_OF_RESULTS = :num
+      end
+    end
+
+    DEFAULT_OPTIONS = {
+      CATEGORY => 'apps',
+      LANGUAGE => 'en',
+      APPLY_SORTING => 1, # 0 means no sorting
+      SAFE_SEARCH => 0, # apply safesearch to results
+      NUMBER_OF_RESULTS => 10 # number of results to display
+    }
 
 Your gem doesn't do __ >:(
 ======
