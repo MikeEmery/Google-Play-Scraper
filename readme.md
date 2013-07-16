@@ -19,7 +19,7 @@ Doing a search
     
 
 
-Did I Miss An Attribute?
+Your gem doesn't do __ >:(
 ======
 Create a fork request and provide some kind of rspec test for it - otherwise I might break it accidentially in future.
 
