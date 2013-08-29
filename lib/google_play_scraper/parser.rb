@@ -13,6 +13,10 @@ class GooglePlayScraper::Parser
   def results
     doc = Nokogiri::HTML(raw_html)
     
+    unless doc.css('.card').any?
+      raise 'Could not parse app store results page'
+    end
+  
     results = []
     
     doc.css('.card').each do |app_container|

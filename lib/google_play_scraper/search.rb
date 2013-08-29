@@ -5,7 +5,7 @@ class GooglePlayScraper::Search
   
   include GooglePlayScraper::SearchOptions
   
-  attr_reader :query, :options
+  attr_reader :query, :options, :google_play_reachable
   
   GOOGLE_PLAY_SEARCH_URL = GooglePlayScraper::GOOGLE_PLAY_BASE_URL + "/store/search"
   
@@ -20,6 +20,7 @@ class GooglePlayScraper::Search
   def initialize(query, options = {})
     @options = DEFAULT_OPTIONS.merge(options)
     @options['q'] = query
+    @google_play_reachable = true
   end
   
   def run
@@ -28,11 +29,20 @@ class GooglePlayScraper::Search
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
+    results = []
     
-    parser = GooglePlayScraper::Parser.new(response.body)
-    parser.results
+    begin
+      request = Net::HTTP::Get.new(uri.request_uri)
+      response = http.request(request)
+      response.value
+    
+      parser = GooglePlayScraper::Parser.new(response.body)
+      results = parser.results
+    rescue
+      @google_play_reachable = false
+    end
+    
+    results
   end
   
   def build_uri

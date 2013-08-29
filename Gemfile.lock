@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    google_play_scraper (0.0.1)
+    google_play_scraper (0.0.2)
       addressable (~> 2.3.0)
       nokogiri (>= 1.5.0)
 
